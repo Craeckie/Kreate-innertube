@@ -175,4 +175,33 @@ class InnertubeSongImplTest {
                        )
                    }
     }
+
+    /**
+     * Regression: YouTube now sometimes omits the top-level `videoId` on the now-playing
+     * `playlistPanelVideoRenderer`; the id must still be recovered from
+     * `navigationEndpoint.watchEndpoint.videoId`.
+     */
+    @Test
+    fun testFromPlaylistPanelRendererContentVideoRendererMissingTopLevelVideoId() {
+        val fileName = "ytm/next/song_playlistPanelVideoRenderer_no_videoId.json"
+        ClassLoader.getSystemResourceAsStream( fileName )
+                   .also( ::assertNotNull )
+                   ?.use { inputStream ->
+                       val renderer = inputStream.decode<PlaylistPanelRendererImpl.ContentImpl.VideoRendererImpl>()
+                       assertNotNull( renderer )
+                       assertNull( renderer.videoId )
+
+                       assertProperties(
+                           InnertubeSongImpl.from( renderer ),
+                           "a_H0K9W984E",
+                           "TU SANCHO",
+                           6,
+                           true,
+                           "2:58",
+                           true,
+                           1,
+                           "Fuerza Regida"
+                       )
+                   }
+    }
 }

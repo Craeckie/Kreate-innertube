@@ -251,7 +251,9 @@ internal class InnertubeImpl: Innertube {
                             ?.content
                             ?.playlistPanelRenderer
                             ?.contents
-                            ?.firstNotNullOfOrNull(PlaylistPanelRenderer.Content::playlistPanelVideoRenderer )
+                            ?.mapNotNull( PlaylistPanelRenderer.Content::playlistPanelVideoRenderer )
+                            // Skip entries without a resolvable id (e.g. stray ad/automix rows)
+                            ?.firstOrNull { (it.videoId ?: it.navigationEndpoint.watchEndpoint?.videoId) != null }
             ) { "missing playlistPanelVideoRenderer while parsing songBasicInfo" }
 
             InnertubeSongImpl.from( renderer )

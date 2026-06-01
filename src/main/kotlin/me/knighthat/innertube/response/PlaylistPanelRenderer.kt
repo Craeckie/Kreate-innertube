@@ -21,7 +21,7 @@ interface PlaylistPanelRenderer {
             val lengthText: Runs
             val selected: Boolean
             val navigationEndpoint: Endpoint
-            val videoId: String
+            val videoId: String?
             val shortBylineText: Runs
             val badges: List<Badge>
             val playlistSetVideoId: String?

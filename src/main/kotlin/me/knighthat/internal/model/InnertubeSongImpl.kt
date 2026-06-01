@@ -62,8 +62,14 @@ internal data class InnertubeSongImpl(
                 }
             }
 
+            // YouTube sometimes omits the top-level [videoId] on the now-playing
+            // renderer; the id is still reachable via the watch endpoint. This mirrors
+            // the MusicResponsiveListItemRenderer path below.
+            val id = renderer.videoId ?: renderer.navigationEndpoint.watchEndpoint?.videoId
+            requireNotNull( id ) { "playlistPanelVideoRenderer has no resolvable videoId" }
+
             return InnertubeSongImpl(
-                renderer.videoId,
+                id,
                 renderer.title.firstText,
                 renderer.thumbnail.thumbnails,
                 renderer.badges.containsExplicitBadge,

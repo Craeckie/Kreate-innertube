@@ -25,7 +25,7 @@ internal data class PlaylistPanelRendererImpl(
             override val lengthText: RunsImpl,
             override val selected: Boolean,
             override val navigationEndpoint: EndpointImpl,
-            override val videoId: String,
+            override val videoId: String? = null,
             override val shortBylineText: RunsImpl,
             override val badges: List<BadgeImpl> = emptyList(),
             override val playlistSetVideoId: String?,
