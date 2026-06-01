@@ -122,7 +122,7 @@ class InnerTube : KoinComponent {
         params: String? = null,
         continuation: String? = null,
     ) = withRetry {
-        httpClient.post("search") {
+        httpClient.post("/youtubei/v1/search") {
             ytClient(client, setLogin = useLoginForBrowse)
             setBody(
                 SearchBody(
@@ -147,7 +147,7 @@ class InnerTube : KoinComponent {
         signatureTimestamp: Int?,
         poToken: String? = null,
     ) = withRetry {
-        httpClient.post("player") {
+        httpClient.post("/youtubei/v1/player") {
             ytClient(client, setLogin = true)
             setBody(
                 PlayerBody(
@@ -203,7 +203,7 @@ class InnerTube : KoinComponent {
         continuation: String? = null,
         setLogin: Boolean = false,
     ) = withRetry {
-        httpClient.post("browse") {
+        httpClient.post("/youtubei/v1/browse") {
             ytClient(client, setLogin = setLogin || useLoginForBrowse)
             setBody(
                 BrowseBody(
@@ -229,7 +229,7 @@ class InnerTube : KoinComponent {
         params: String?,
         continuation: String? = null,
     ) = withRetry {
-        httpClient.post("next") {
+        httpClient.post("/youtubei/v1/next") {
             ytClient(client, setLogin = true)
             setBody(
                 NextBody(
@@ -249,7 +249,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         tokens: List<String>
     ) = withRetry {
-        httpClient.post("feedback") {
+        httpClient.post("/youtubei/v1/feedback") {
             ytClient(client, setLogin = true)
             setBody(
                 FeedbackBody(
@@ -264,7 +264,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         input: String,
     ) = withRetry {
-        httpClient.post("music/get_search_suggestions") {
+        httpClient.post("/youtubei/v1/music/get_search_suggestions") {
             ytClient(client)
             setBody(
                 GetSearchSuggestionsBody(
@@ -280,7 +280,7 @@ class InnerTube : KoinComponent {
         videoIds: List<String>?,
         playlistId: String?,
     ) = withRetry {
-        httpClient.post("music/get_queue") {
+        httpClient.post("/youtubei/v1/music/get_queue") {
             ytClient(client)
             setBody(
                 GetQueueBody(
@@ -315,7 +315,7 @@ class InnerTube : KoinComponent {
     suspend fun getSwJsData() = withRetry { httpClient.get("https://music.youtube.com/sw.js_data") }
 
     suspend fun accountMenu(client: YouTubeClient) = withRetry {
-        httpClient.post("account/account_menu") {
+        httpClient.post("/youtubei/v1/account/account_menu") {
             ytClient(client, setLogin = true)
             setBody(AccountMenuBody(client.toContext(locale, visitorData, dataSyncId)))
         }
@@ -325,7 +325,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         videoId: String,
     ) = withRetry {
-        httpClient.post("like/like") {
+        httpClient.post("/youtubei/v1/like/like") {
             ytClient(client, setLogin = true)
             setBody(
                 LikeBody(
@@ -340,7 +340,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         videoId: String,
     ) = withRetry {
-        httpClient.post("like/removelike") {
+        httpClient.post("/youtubei/v1/like/removelike") {
             ytClient(client, setLogin = true)
             setBody(
                 LikeBody(
@@ -356,7 +356,7 @@ class InnerTube : KoinComponent {
         channelId: String,
         params: String? = null,
     ) = withRetry {
-        httpClient.post("subscription/subscribe") {
+        httpClient.post("/youtubei/v1/subscription/subscribe") {
             ytClient(client, setLogin = true)
             setBody(
                 SubscribeBody(
@@ -373,7 +373,7 @@ class InnerTube : KoinComponent {
         channelId: String,
         params: String? = null,
     ) = withRetry {
-        httpClient.post("subscription/unsubscribe") {
+        httpClient.post("/youtubei/v1/subscription/unsubscribe") {
             ytClient(client, setLogin = true)
             setBody(
                 SubscribeBody(
@@ -389,7 +389,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         playlistId: String,
     ) = withRetry {
-        httpClient.post("like/like") {
+        httpClient.post("/youtubei/v1/like/like") {
             ytClient(client, setLogin = true)
             setBody(
                 LikeBody(
@@ -404,7 +404,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         playlistId: String,
     ) = withRetry {
-        httpClient.post("like/removelike") {
+        httpClient.post("/youtubei/v1/like/removelike") {
             ytClient(client, setLogin = true)
             setBody(
                 LikeBody(
@@ -420,7 +420,7 @@ class InnerTube : KoinComponent {
         playlistId: String,
         videoId: String,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -439,7 +439,7 @@ class InnerTube : KoinComponent {
         playlistId: String,
         addPlaylistId: String,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -459,7 +459,7 @@ class InnerTube : KoinComponent {
         videoId: String,
         setVideoId: String,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -482,7 +482,7 @@ class InnerTube : KoinComponent {
         setVideoId: String,
         successorSetVideoId: String?,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -503,7 +503,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         title: String,
     ) = withRetry {
-        httpClient.post("playlist/create") {
+        httpClient.post("/youtubei/v1/playlist/create") {
             ytClient(client, true)
             setBody(
                 CreatePlaylistBody(
@@ -519,7 +519,7 @@ class InnerTube : KoinComponent {
         playlistId: String,
         name: String,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -571,7 +571,7 @@ class InnerTube : KoinComponent {
         playlistId: String,
         blobId: String,
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -593,7 +593,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         playlistId: String
     ) = withRetry {
-        httpClient.post("browse/edit_playlist") {
+        httpClient.post("/youtubei/v1/browse/edit_playlist") {
             ytClient(client, setLogin = true)
             setBody(
                 EditPlaylistBody(
@@ -611,7 +611,7 @@ class InnerTube : KoinComponent {
         client: YouTubeClient,
         playlistId: String,
     ) = withRetry {
-        httpClient.post("playlist/delete") {
+        httpClient.post("/youtubei/v1/playlist/delete") {
             println("deleting $playlistId")
             ytClient(client, setLogin = true)
             setBody(
